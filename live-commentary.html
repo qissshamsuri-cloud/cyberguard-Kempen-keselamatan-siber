@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#092653">
+  <title>CYBERGUARD | Live Commentary</title>
+  <style>
+    :root{--navy:#092653;--blue:#0878ca;--cyan:#42d9ef;--gold:#ffcb55;--ink:#18365f;--muted:#61738e;--paper:#fffdf8}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:Nunito,"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:#e9f6ff;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-3;background:linear-gradient(135deg,#d9f3ff 0%,#f8efff 48%,#e6f7ff 100%)}
+    body:after{content:"";position:fixed;inset:0;z-index:-2;opacity:.22;pointer-events:none;background-image:radial-gradient(#2685b8 1px,transparent 1px);background-size:24px 24px}
+    .topstrip{min-height:35px;padding:8px 14px;background:#082754;color:#dffaff;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:900;letter-spacing:2px}
+    .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px clamp(16px,5vw,70px);background:#fffdf2ed;backdrop-filter:blur(14px);box-shadow:0 5px 22px #12355b20;border-bottom:3px solid var(--gold)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:1000;color:#0b4d91;letter-spacing:1px;font-size:18px}
+    .brandmark{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#0a3974,#0878ca);color:#8ff5ff;font-size:25px;box-shadow:0 5px 14px #0878ca40}
+    .brand small{display:block;font-size:9px;letter-spacing:2px;color:#e47e35}
+    .navlinks{display:flex;flex-wrap:wrap;gap:6px}
+    .navlinks a{padding:9px 12px;border-radius:18px;font-size:11px;font-weight:900;color:#24456d;text-decoration:none;transition:.2s}
+    .navlinks a:hover{background:#d9f8ff;color:#075a9c}
+    main{width:min(1120px,calc(100% - 32px));margin:38px auto 60px}
+    .hero{position:relative;overflow:hidden;padding:clamp(28px,5vw,54px);border-radius:30px;background:linear-gradient(120deg,#082653 0%,#075a9b 58%,#087fbd 100%);color:white;box-shadow:0 18px 45px #09265330}
+    .hero:before,.hero:after{content:"";position:absolute;border:1px solid #8cefff45;border-radius:50%;pointer-events:none}
+    .hero:before{width:330px;height:330px;right:-95px;top:-155px;box-shadow:0 0 0 28px #8cefff0d,0 0 0 58px #8cefff0a}
+    .hero:after{width:180px;height:180px;right:95px;bottom:-125px;box-shadow:0 0 0 22px #8cefff0d}
+    .eyebrow{display:inline-block;padding:7px 12px;border:1px solid #8cefff70;border-radius:30px;background:#ffffff12;color:#aaf7ff;font-size:10px;font-weight:1000;letter-spacing:2px}
+    h1{position:relative;z-index:1;margin:17px 0 10px;font-size:clamp(34px,6vw,58px);line-height:1.02;letter-spacing:-1.5px}
+    .hero p{position:relative;z-index:1;max-width:680px;margin:0;color:#e1f7ff;font-size:clamp(14px,2vw,17px);line-height:1.7}
+    .live-tag{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:9px 14px;border-radius:30px;background:#ffcb55;color:#17375e;font-size:11px;font-weight:1000;letter-spacing:1px}
+    .pulse{width:8px;height:8px;border-radius:50%;background:#e64b50;box-shadow:0 0 0 0 #e64b5070;animation:pulse 1.6s infinite}
+    @keyframes pulse{70%{box-shadow:0 0 0 9px #e64b5000}100%{box-shadow:0 0 0 0 #e64b5000}}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:34px 4px 16px}
+    .section-head h2{margin:0;color:#0b3970;font-size:clamp(21px,3vw,29px)}
+    .section-head p{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+    .padlet-shell{padding:12px;border:1px solid #b9e8f5;border-radius:24px;background:#ffffffd9;box-shadow:0 14px 38px #12355b18}
+    .padlet-frame{position:relative;overflow:hidden;border-radius:15px;background:#f4f4f4;min-height:620px}
+    .padlet-frame iframe{display:block;width:100%;height:680px;border:0}
+    .note{display:flex;gap:12px;align-items:flex-start;margin-top:17px;padding:16px 18px;border:1px solid #c9e8f4;border-radius:17px;background:#ffffffc9;color:#385878;font-size:13px;line-height:1.6}
+    .note-icon{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#e0f8ff;font-size:18px}
+    .footer{text-align:center;padding:25px 16px;background:#082754;color:#d7efff;font-size:11px;letter-spacing:.5px}
+    .footer strong{color:#ffcf61}
+    @media(max-width:650px){.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%;gap:2px}.navlinks a{padding:8px 9px;font-size:10px}main{margin-top:22px}.padlet-shell{padding:7px}.padlet-frame iframe{height:720px}.section-head{display:block}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="topstrip">CYBERGUARD • THINK BEFORE YOU CLICK • STAY SAFE ONLINE</div>
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="CYBERGUARD Home">
+      <span class="brandmark">⌘</span>
+      <span>CYBERGUARD<small>CYBER SAFETY CAMPAIGN</small></span>
+    </a>
+    <div class="navlinks">
+      <a href="index.html">HOME</a>
+      <a href="pengenalan.html">PENGENALAN</a>
+      <a href="ancaman.html">ANCAMAN</a>
+      <a href="pencegahan.html">PENCEGAHAN</a>
+      <a href="games.html">GAMES</a>
+      <a href="profil.html">PROFIL</a>
+      <a href="kedai.html">KEDAI</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <span class="eyebrow">COMMUNITY • AWARENESS • ACTION</span>
+      <h1>LIVE<br>COMMENTARY</h1>
+      <p>Suara anda penting! Kongsikan pandangan, pengalaman dan kesedaran tentang keselamatan siber. Jom bina komuniti digital yang lebih bijak, bertanggungjawab dan selamat.</p>
+      <span class="live-tag"><span class="pulse"></span> PADLET LIVE WALL</span>
+    </section>
+
+    <div class="section-head">
+      <div>
+        <h2>Ruang Perkongsian Siber</h2>
+        <p>Tulis komen dan berikan respons secara berhemah kepada perkongsian orang lain.</p>
+      </div>
+    </div>
+
+    <section class="padlet-shell" aria-label="Padlet Live Commentary">
+      <div class="padlet-frame">
+        <iframe
+          src="https://padlet.com/embed/s025ipfhjwqppgy9v59w"
+          title="CYBERGUARD Live Commentary Padlet"
+          loading="lazy"
+          allow="camera;microphone;geolocation;display-capture;clipboard-write">
+        </iframe>
+      </div>
+    </section>
+
+    <aside class="note">
+      <span class="note-icon">💡</span>
+      <div><strong>Etika Live Commentary</strong><br>
+        Gunakan bahasa yang sopan, jangan kongsi maklumat peribadi atau kata laluan, semak fakta sebelum membuat dakwaan dan hormati pandangan pengguna lain.
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">© <strong>CYBERGUARD</strong> • THINK BEFORE YOU CLICK • BE SMART, BE SAFE</footer>
+</body>
+</html>
